@@ -100,6 +100,7 @@ def train_main(dataset,
                sample_every=100,
                run_name='run1',
                restore_from='latest',
+               stop_after=None,
                save_every=1000):
 
     enc = encoder.get_encoder(model_name)
@@ -207,7 +208,7 @@ def train_main(dataset,
         start_time = time.time()
 
         try:
-            while True:
+            while counter != stop_after:
                 if counter % save_every == 0:
                     save()
                 if counter % sample_every == 0:
@@ -230,6 +231,7 @@ def train_main(dataset,
                 counter += 1
         except KeyboardInterrupt:
             print('interrupted')
+        finally:
             save()
 
 
