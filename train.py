@@ -10,7 +10,9 @@ import tensorflow as tf
 import random
 import time
 
-import model, sample, encoder
+import model
+import sample
+import encoder
 
 CHECKPOINT_DIR = 'checkpoint'
 SAMPLE_DIR = 'samples'
@@ -101,6 +103,10 @@ def train_main(dataset,
                run_name='run1',
                restore_from='latest',
                stop_after=None,
+               learning_rate=0.001,
+               beta1=0.9,
+               beta2=0.999,
+               epsilon=1e-08,
                save_every=1000):
 
     enc = encoder.get_encoder(model_name)
@@ -134,7 +140,12 @@ def train_main(dataset,
             top_k=40)
 
         train_vars = [v for v in tf.trainable_variables() if 'model' in v.name]
-        opt = tf.train.AdamOptimizer().minimize(loss, var_list=train_vars)
+        opt = tf.train.AdamOptimizer(learning_rate=learning_rate,
+                                     beta1=beta1,
+                                     beta2=beta2,
+                                     epsilon=epsilon
+                                     ).minimize(loss,
+                                                var_list=train_vars)
 
         saver = tf.train.Saver(
             var_list=train_vars,
@@ -191,10 +202,11 @@ def train_main(dataset,
             index = 0
             while index < sample_num:
                 out = sess.run(
-                    tf_sample, feed_dict={context: batch_size*[context_tokens]})
+                    tf_sample, feed_dict={context: batch_size * [context_tokens]})
                 for i in range(min(sample_num - index, batch_size)):
                     text = enc.decode(out[i])
-                    text = '======== SAMPLE {} ========\n{}\n'.format(index + 1, text)
+                    text = '======== SAMPLE {} ========\n{}\n'.format(
+                        index + 1, text)
                     all_text.append(text)
                     index += 1
             print(text)
