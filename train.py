@@ -45,6 +45,7 @@ parser.add_argument('--val_dataset', metavar='PATH', type=str, default=None, hel
 parser.add_argument('--val_batch_size', metavar='SIZE', type=int, default=2, help='Batch size for validation.')
 parser.add_argument('--val_batch_count', metavar='N', type=int, default=40, help='Number of batches for validation.')
 parser.add_argument('--val_every', metavar='STEPS', type=int, default=0, help='Calculate validation loss every STEPS steps.')
+parser.add_argument('--stop_after', metavar='STOP', type=int, default=None, help='Stop after training counter reaches STOP')
 
 
 def maketree(path):
@@ -224,7 +225,7 @@ def main():
         start_time = time.time()
 
         try:
-            while True:
+            while counter != args.stop_after::
                 if counter % args.save_every == 0:
                     save()
                 if counter % args.sample_every == 0:
@@ -259,6 +260,7 @@ def main():
                 counter += 1
         except KeyboardInterrupt:
             print('interrupted')
+        finally:
             save()
 
 
