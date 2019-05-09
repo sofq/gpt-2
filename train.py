@@ -225,7 +225,7 @@ def main():
         start_time = time.time()
 
         try:
-            while counter != args.stop_after::
+            while counter != args.stop_after:
                 if counter % args.save_every == 0:
                     save()
                 if counter % args.sample_every == 0:
