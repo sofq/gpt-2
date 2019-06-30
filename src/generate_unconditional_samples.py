@@ -70,7 +70,7 @@ def sample_model(
                 t = ''
                 text.split()
                 for x in text.split():
-                    for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_P','_R','_S','_T','_V','_X','_F']:
+                    for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_P','_R','_S','_T','_V','_X','_F','_B','_H']:
                         if x.endswith(y):
                             x = x.replace(y,'')
                             x = x.replace('_',' ')
