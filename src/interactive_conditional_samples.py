@@ -85,12 +85,11 @@ def interact_model(
                     generated += 1
                     text = enc.decode(out[i])
                     t = ''
-                    text.split()
-                        for x in text.split():
-                            for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_Vc','_P','_R','_S','_T','_V','_X','_F','_B','_H']:
-                                if x.endswith(y):
-                                    x = x.replace(y,'')
-                                    x = x.repalce('_',' ')
+                    for x in text.split():
+                        for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_Vc','_P','_R','_S','_T','_V','_X','_F','_B','_H']:
+                            if x.endswith(y):
+                                x = x.replace(y,'')
+                                x = x.repalce('_',' ')
                         t += x + ' '
                     text = t
                     print("=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40)
