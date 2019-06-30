@@ -5,6 +5,7 @@ import json
 import os
 import numpy as np
 import tensorflow as tf
+from pyvi import ViTokenizer, ViPosTagger
 
 import model, sample, encoder
 
@@ -69,6 +70,11 @@ def interact_model(
             while not raw_text:
                 print('Prompt should not be empty!')
                 raw_text = input("Model prompt >>> ")
+                a = ViPosTagger.postagging(ViTokenizer.tokenize(raw_text))
+                s = ''
+                for i in range(0,len(a[0])):
+                    s += a[0][i] + '_' + a[1][i] + ' '
+                raw_text = s
             context_tokens = enc.encode(raw_text)
             generated = 0
             for _ in range(nsamples // batch_size):
