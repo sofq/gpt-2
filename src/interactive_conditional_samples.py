@@ -66,10 +66,10 @@ def interact_model(
         saver.restore(sess, ckpt)
 
         while True:
-            raw_text = input("Model prompt >>> ")
+            raw_text = input("Nhập câu của bạn >>> ")
             while not raw_text:
                 print('Prompt should not be empty!')
-                raw_text = input("Model prompt >>> ")
+                raw_text = input("Nhập câu của bạn >>> ")
                 a = ViPosTagger.postagging(ViTokenizer.tokenize(raw_text))
                 s = ''
                 for i in range(0,len(a[0])):
@@ -89,7 +89,7 @@ def interact_model(
                         for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_Vc','_P','_R','_S','_T','_V','_X','_F','_B','_H']:
                             if x.endswith(y):
                                 x = x.replace(y,'')
-                                x = x.repalce('_',' ')
+                                x = x.replace('_',' ')
                         t += x + ' '
                     text = t
                     print("=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40)
