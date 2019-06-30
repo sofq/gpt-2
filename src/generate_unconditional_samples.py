@@ -73,7 +73,7 @@ def sample_model(
                     for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_P','_R','_S','_T','_V','_X','_F']:
                         if x.endswith(y):
                             x = x.replace(y,'')
-                            x = x.replace('_','')
+                            x = x.replace('_',' ')
                     t += x + ' '
                 text = t
                 print("=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40)
