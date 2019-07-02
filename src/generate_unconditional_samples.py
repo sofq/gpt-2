@@ -74,7 +74,7 @@ def sample_model(
                             x = x.replace(y,'')
                             x = x.replace('_',' ')
                     t += x + ' '
-                text = t
+                text = t.replace('.','\n')
                 print("=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40)
                 print(text)
 
