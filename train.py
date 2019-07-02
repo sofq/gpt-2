@@ -190,9 +190,7 @@ def main():
                     feed_dict={context: args.batch_size * [context_tokens]})
                 for i in range(min(args.sample_num - index, args.batch_size)):
                     text = enc.decode(out[i])
-                    
                     t = ''
-                    text.split()
                     for x in text.split():
                         for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_P','_R','_S','_T','_V','_X','_F','_B','_Vc','_H']:
                             if x.endswith(y):
