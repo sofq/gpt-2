@@ -68,11 +68,12 @@ def sample_model(
                 generated += batch_size
                 text = enc.decode(out[i])
                 t = ''
-                for x in text.split('\\n'):
-                    for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_P','_R','_S','_T','_Vc','_V','_X','_F','_B','_H']:
-                        if x.endswith(y):
-                            x = x.replace(y,'')
-                            x = x.replace('_',' ')
+                for x in text.split():
+                    if  x != '\n':
+                        for y in ['_A','_C','_E','_I','_L','_M','_N','_Nc','_Ny','_Np','_Nu','_P','_R','_S','_T','_Vc','_V','_X','_F','_B','_H']:
+                            if x.endswith(y):
+                                x = x.replace(y,'')
+                                x = x.replace('_',' ')
                     t += x + ' '
                 text = t
                 print("=" * 40 + " SAMPLE " + str(generated) + " " + "=" * 40)
